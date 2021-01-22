@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.0">
+  <object class="ttk.Frame" id="mainframe">
+    <property name="height">500</property>
+    <property name="padding">10</property>
+    <property name="width">200</property>
+    <layout manager="pack">
+      <property name="expand">false</property>
+      <property name="propagate">False</property>
+      <property name="side">top</property>
+    </layout>
+    <child>
+      <object class="ttk.Labelframe" id="workspace">
+        <property name="height">200</property>
+        <property name="labelanchor">n</property>
+        <property name="padding">30</property>
+        <property name="text" translatable="yes">Vinnurými</property>
+        <layout manager="grid">
+          <property name="column">1</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="rowspan">2</property>
+        </layout>
+        <child>
+          <object class="ttk.Entry" id="entry_1">
+            <property name="state">disabled</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="pady">10</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+              <property type="row" id="0" name="pad">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="entry_2">
+            <property name="text" translatable="yes">á</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="pady">10</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="entry_3">
+            <property name="text" translatable="yes">aþ</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="pady">10</property>
+              <property name="propagate">True</property>
+              <property name="row">5</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_1">
+            <property name="text" translatable="yes">Orðmynd</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipadx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_2">
+            <property name="text" translatable="yes">Lemma</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipadx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_3">
+            <property name="text" translatable="yes">Mark</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipadx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">5</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="back">
+            <property name="command">_prev_word</property>
+            <property name="text" translatable="yes">&lt;&lt;</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property type="row" id="0" name="pad">30</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="forward">
+            <property name="command">_next_word</property>
+            <property name="text" translatable="yes">&gt;&gt;</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="columnspan">2</property>
+              <property name="padx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property type="row" id="0" name="pad">30</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="labelframe_10">
+            <property name="borderwidth">4</property>
+            <property name="height">180</property>
+            <property name="padding">10</property>
+            <property name="relief">ridge</property>
+            <property name="text" translatable="yes">Útvíkkað mark</property>
+            <property name="width">200</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="columnspan">4</property>
+              <property name="ipadx">100</property>
+              <property name="padx">10</property>
+              <property name="pady">10</property>
+              <property name="propagate">False</property>
+              <property name="row">7</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="extended_tag">
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="save_change_button">
+            <property name="command">_save_changes</property>
+            <property name="text" translatable="yes">Vista</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="ipadx">10</property>
+              <property name="pady">10</property>
+              <property name="propagate">True</property>
+              <property name="row">6</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Frame" id="frame_4">
+            <property name="height">40</property>
+            <property name="relief">flat</property>
+            <property name="width">400</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="columnspan">4</property>
+              <property name="propagate">False</property>
+              <property name="row">1</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="prev_word">
+                <property name="anchor">w</property>
+                <property name="compound">left</property>
+                <property name="justify">right</property>
+                <property name="text" translatable="yes">label_32</property>
+                <layout manager="pack">
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="current_word">
+                <property name="font">{Ubuntu} 12 {bold}</property>
+                <property name="padding">15</property>
+                <property name="text" translatable="yes">label_33</property>
+                <layout manager="pack">
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="next_word">
+                <property name="text" translatable="yes">label_34</property>
+                <layout manager="pack">
+                  <property name="propagate">True</property>
+                  <property name="side">bottom</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="new_lemma_label">
+            <property name="text" translatable="yes">-</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="new_tag_label">
+            <property name="text" translatable="yes">-</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="propagate">True</property>
+              <property name="row">5</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="corrected_index">
+            <property name="text" translatable="yes">Leiðrétt</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Separator" id="separator_6">
+            <property name="orient">vertical</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="ipady">55</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property name="rowspan">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Labelframe" id="pos_space">
+        <property name="height">250</property>
+        <property name="labelanchor">nw</property>
+        <property name="padding">5</property>
+        <property name="text" translatable="yes">Uppástungur</property>
+        <property name="width">190</property>
+        <layout manager="grid">
+          <property name="column">2</property>
+          <property name="ipadx">20</property>
+          <property name="padx">5</property>
+          <property name="propagate">False</property>
+          <property name="row">1</property>
+          <property name="sticky">n</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="option_text">
+            <property name="justify">left</property>
+            <layout manager="grid">
+              <property name="propagate">True</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="frame_3">
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="columnspan">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="pygubu.builder.widgets.pathchooserinput" id="path_chooser">
+            <property name="mustexist">true</property>
+            <property name="title" translatable="yes">Veldu skrá</property>
+            <property name="type">file</property>
+            <layout manager="grid">
+              <property name="columnspan">3</property>
+              <property name="ipadx">40</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="choose_path">
+            <property name="command">_open_file</property>
+            <property name="text" translatable="yes">Velja</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="padx">10</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Checkbutton" id="lemma_check">
+            <property name="text" translatable="yes">Lemmur</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="columnspan">2</property>
+              <property name="padx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Checkbutton" id="tag_check">
+            <property name="text" translatable="yes">Mörk</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="columnspan">2</property>
+              <property name="padx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_14">
+            <property name="text" translatable="yes">Dálkar til leiðréttingar:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="columnspan">1</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Checkbutton" id="old_file">
+            <property name="text" translatable="yes">Skjal nú þegar í vinnslu</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="columnspan">2</property>
+              <property name="propagate">True</property>
+              <property name="row">5</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_24">
+            <property name="text" translatable="yes">Veldu csv skrá:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_25">
+            <property name="text" translatable="yes">Afmarkari (Delimiter):</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="pady">10</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="sep_field">
+            <property name="width">5</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">6</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button_3">
+            <property name="command">_save_file</property>
+            <property name="text" translatable="yes">Vista Skrá</property>
+            <layout manager="grid">
+              <property name="column">5</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_35">
+            <property name="foreground">grey</property>
+            <property name="text" translatable="yes">Sjálfgefið: ';'</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="frame_8">
+        <property name="height">150</property>
+        <property name="width">210</property>
+        <layout manager="grid">
+          <property name="column">2</property>
+          <property name="propagate">False</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="ttk.Entry" id="find_index">
+            <property name="width">15</property>
+            <layout manager="grid">
+              <property name="columnspan">2</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="index_label">
+            <property name="text" translatable="yes">Fara á orð nr.</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="find_index_button">
+            <property name="command">_go_to_index</property>
+            <property name="text" translatable="yes">OK</property>
+            <property name="width">3</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="padx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label_22">
+            <property name="text" translatable="yes">Núverandi orð:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="current_index">
+            <property name="anchor">w</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="columnspan">2</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="frame_image">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">2</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
