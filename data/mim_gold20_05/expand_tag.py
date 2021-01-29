@@ -14,6 +14,7 @@ MYND_MAPPING = {'g':'germynd', 'm':'miðmynd'}
 TID_MAPPING = {'n':'nútíð', 'þ':'þátíð'}
 TOF_MAPPING = {'f':'frumtala', 'a':'ártöl og fleiri óbeygjanlegar tölur', 'p':'prósentutölur', 'o':'fjöldatölur framan við hundrað og þúsund'}
 PUNKT_MAPPING= {'l':'lok setningar', 'k':'komma','g':'gæsalappir','a':'önnur greinarmerki'}
+ACRO_MAPPING = {'s':'skammstöfun','t':'stytting'}
 POS = 'orðflokkur'
 CASE_GOV = 'fallstjórn'
 COMP = 'stig'
@@ -36,10 +37,17 @@ def expand_tag(tag):
     if tag[0] == "p":
         expanded_tag[POS]="greinarmerki"
         expanded_tag[SUBCATEGORY]=PUNKT_MAPPING[tag[1]] if tag[1] in PUNKT_MAPPING.keys() else None
+    elif tag[0] == "v":
+        expanded_tag[POS]="tölvupóst-/veffang"
+    elif tag[0] == "m":
+        expanded_tag[POS]="tákn"
     elif tag[0]=='x':
         expanded_tag[POS]="ógreint"
     elif tag[0]=='e':
         expanded_tag[POS]="erlent orð"
+    elif tag[0]=='k':
+        expanded_tag[POS]="skammtöfun"
+        expanded_tag[SUBCATEGORY]=ACRO_MAPPING[tag[1]] if tag[1] in ACRO_MAPPING.keys() else None
     elif tag[0]=='a':
         if tag[1]=='u':
             expanded_tag[POS]="upphrópun"
@@ -110,5 +118,5 @@ def expand_tag(tag):
     return expanded_tag
 
 if __name__ == '__main__':
-    test = expand_tag('nven')
+    test = expand_tag('kt')
     print(test)

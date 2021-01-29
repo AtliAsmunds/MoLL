@@ -2,7 +2,7 @@ import json
 
 ERROR = "Ekki er hægt að bæta við tagi!"
 
-with open('data/MIM-GOLD20_05/markamengi.json') as j_file:
+with open('data/mim_gold20_05/markamengi.json') as j_file:
     tag_dict = json.load(j_file)
 
 def show_option(tag:str, tag_sets:dict)->dict:
