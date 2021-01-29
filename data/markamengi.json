@@ -8,17 +8,16 @@
         "s":"Sagnorð",
         "a":"Atviksorð",
         "c":"Samtenging",
-        "k":"Skammstöfun",
         "e":"Erlent orð",
         "x":"Ógreint orð",
-        "v":"Tölvupóst-/Veffang",
-        "p":"Greinamerki",
-        "m":"Tákn"
+        "p":"Greinamerki"
     },
     "Kyn":{
         "k":"Karlkyn",
         "v":"Kvenkyn",
-        "h":"Hvorugkyn"
+        "h":"Hvorugkyn",
+        "x":"Ókyngreint"
+
     },
     "Tala":{
         "e":"Eintala",
@@ -94,7 +93,7 @@
         "h":"Hvorugkyn"
     },
     "Fallstjórn":{
-        "a":"Stýrir ekki fall",
+        "a":"Stýrir ekki falli",
         "u":"Upphrópun",
         "o":"Stýrir þolfalli",
         "þ":"Stýrir þágufalli",
