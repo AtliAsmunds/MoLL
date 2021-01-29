@@ -258,7 +258,7 @@
     </child>
     <child>
       <object class="ttk.Labelframe" id="pos_space">
-        <property name="height">250</property>
+        <property name="height">300</property>
         <property name="labelanchor">nw</property>
         <property name="padding">5</property>
         <property name="text" translatable="yes">Uppástungur</property>
