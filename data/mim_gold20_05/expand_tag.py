@@ -2,7 +2,7 @@
 # With small changes to encompany the main program code
 
 FS_MAPPING = {'a':'stýrir ekki falli', 'f':'stýrir falli'}
-KYN_MAPPING = {'k':'karlkyn', 'v':'kvenkyn', 'h':'hvorugkyn'}
+KYN_MAPPING = {'k':'karlkyn', 'v':'kvenkyn', 'h':'hvorugkyn', '-':'ókyngreint'}
 TALA_MAPPING = {'e':'eintala', 'f':'fleirtala'}
 FALL_MAPPING = {'n':'nefnifall', 'o':'þolfall', 'þ':'þágufall', 'e':'eignarfall'}
 SN_MAPPING = {'m':'mannsnafn', 'ö':'örnefni', 's':'önnur sérnöfn'}
