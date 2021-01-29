@@ -108,3 +108,7 @@ def expand_tag(tag):
 
 
     return expanded_tag
+
+if __name__ == '__main__':
+    test = expand_tag('nven')
+    print(test)

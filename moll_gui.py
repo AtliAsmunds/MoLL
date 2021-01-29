@@ -2,9 +2,13 @@ import os
 from tkinter import IntVar, StringVar, filedialog
 import pygubu
 import pandas as pd
-from data.expand_tag import expand_tag as ex_tag
-from data.options import show_option, tag_dict
+# Uncomment to use the old tagset for IFD
+# from data.expand_tag import expand_tag as ex_tag
+# from data.options import show_option, tag_dict
 
+# Data for the MIM GOLD 20 05 tagset
+from data.mim_gold20_05.expand_tag import expand_tag as ex_tag
+from data.mim_gold20_05.options import show_option, tag_dict
 
 PROJECT_PATH = os.path.dirname(__file__)
 PROJECT_UI = os.path.join(PROJECT_PATH, "data/Moll.ui")
