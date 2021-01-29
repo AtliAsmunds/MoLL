@@ -2,7 +2,7 @@ import json
 
 ERROR = "Ekki er hægt að bæta við tagi!"
 
-with open('data/markamengi.json') as j_file:
+with open('data/MIM-GOLD20_05/markamengi.json') as j_file:
     tag_dict = json.load(j_file)
 
 def show_option(tag:str, tag_sets:dict)->dict:
@@ -54,7 +54,7 @@ def show_option(tag:str, tag_sets:dict)->dict:
     
 
 if __name__ == '__main__': 
-    test_tag = 'nve'
+    test_tag = 'k'
     try:
         option = show_option(test_tag, tag_dict)
     except IndexError:
