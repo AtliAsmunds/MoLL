@@ -8,15 +8,17 @@
         "s":"Sagnorð",
         "a":"Atviksorð",
         "c":"Samtenging",
+        "k":"Skammstöfun",
         "e":"Erlent orð",
         "x":"Ógreint orð",
-        "p":"Greinamerki"
+        "v":"Tölvupóst-/Veffang",
+        "p":"Greinamerki",
+        "m":"Tákn"
     },
     "Kyn":{
         "k":"Karlkyn",
         "v":"Kvenkyn",
-        "h":"Hvorugkyn",
-        "x":"Ókyngreint"
+        "h":"Hvorugkyn"
     },
     "Tala":{
         "e":"Eintala",
