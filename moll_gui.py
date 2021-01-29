@@ -53,6 +53,7 @@ class MollGuiApp:
         self.tags = []
         self.new_tag = []
         self.new_lemma = []
+        self.delimiter = ""
 
 
         # Initialize persmissions and index
@@ -60,6 +61,8 @@ class MollGuiApp:
         self.allow_tag = 0
         self.allow_save = 0
         self.word_index = 0
+        self.empty = True
+
 
 
         # Initialize changeble string and integer variables
@@ -167,7 +170,7 @@ class MollGuiApp:
     def _go_to_index(self):
         '''Sets the current word index (row) to a specific value'''
 
-        if self.data:
+        if not self.empty:
             try:
                 self.word_index = int(self.index_entry.get())
                 self._update_all()
@@ -184,12 +187,12 @@ class MollGuiApp:
     def _load_file(self, file_name, old_file:int):
         '''Loads up data from the given file for opening'''
 
-        delimiter = ';' if self.separator.get() == '' else self.separator.get()
+        self.delimiter = ';' if self.separator.get() == '' else self.separator.get()
         self.allow_lemma = lemma = self.lemma_check_var.get()
         self.allow_tag = tag = self.tag_check_var.get()
 
         if old_file:
-            self.data = pd.read_csv(file_name, delimiter=delimiter)
+            self.data = pd.read_csv(file_name, delimiter=self.delimiter, engine='python')
             self.word_index = self._find_last_changed(self.data[NEW_TAG])
             try:
                 self.new_lemma = self.data[NEW_LEMMA]
@@ -197,15 +200,17 @@ class MollGuiApp:
                 self.new_lemma = ['' for i in range(len(self.words))]
             self.new_tag = self.data[NEW_TAG]
             self.words = (self.data[WORD])
+            self.empty = False
 
         else:
-            self.data = pd.read_csv(file_name, delimiter=delimiter, names=[WORD, TAG, LEMMA])
+            self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, LEMMA], engine='python')
             self.word_index = 0
             self.words = (self.data[WORD])
 
             # Set all values to empty to account for rows in data
             self.new_lemma = ['' for i in range(len(self.words))]
             self.new_tag = ['' for i in range(len(self.words))]
+            self.empty = False
 
         self._config_entries(lemma, tag)
         self._update_all()
@@ -227,7 +232,6 @@ class MollGuiApp:
 
     def _save_file(self, _event=None):
         '''Adds changes made to data and saves file'''
-
         f = filedialog.asksaveasfile(mode='w', defaultextension="(í vinnslu).csv")
 
         if f is None:
@@ -238,8 +242,8 @@ class MollGuiApp:
             self.data[NEW_LEMMA] = self.new_lemma
 
         # Save to csv without number index
-        self.data.to_csv(f, index=False, sep=';')
-        f.close()
+        self.data.to_csv(f, index=False, sep=self.delimiter)
+        self._file_name.close()
     
 
     def _save_changes(self, _event=None):
