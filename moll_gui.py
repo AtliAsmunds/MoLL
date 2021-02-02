@@ -2,6 +2,7 @@ import os
 from tkinter import IntVar, StringVar, filedialog
 import pygubu
 import pandas as pd
+from time import strftime, gmtime
 # Uncomment to use the old tagset for IFD
 # from data.expand_tag import expand_tag as ex_tag
 # from data.options import show_option, tag_dict
@@ -16,7 +17,7 @@ ERRORS = ("Markastrengur ekki samþykktur",\
             "Ólöglegur upphafsstafur",\
             "Ekki fleiri möguleikar",\
             "Óþekktur valmöguleiki")
-WORD, TAG, LEMMA, NEW_TAG, NEW_LEMMA = 'Orð', 'Mark', 'Lemma', 'Leiðrétt mark', 'Leiðrétt lemma'
+WORD, TAG, UNK, LEMMA, NEW_TAG, NEW_LEMMA = 'Orð', 'Mark', 'UNKNOWN', 'Lemma', 'Leiðrétt_mark', 'Leiðrétt_lemma'
 
 
 class MollGuiApp:
@@ -37,6 +38,8 @@ class MollGuiApp:
         root.after(20, self._show_option_text)
         root.after(20, self._expand_tag)
 
+        pd.options.mode.chained_assignment = None
+
         
         # Read GUI data from file
         self.builder = builder = pygubu.Builder()
@@ -53,6 +56,7 @@ class MollGuiApp:
         self.tags = []
         self.new_tag = []
         self.new_lemma = []
+        self.unknown = []
         self.delimiter = ""
 
 
@@ -62,6 +66,7 @@ class MollGuiApp:
         self.allow_save = 0
         self.word_index = 0
         self.empty = True
+        self.allow_unk = 0
 
 
 
@@ -75,10 +80,12 @@ class MollGuiApp:
         self.options = StringVar()
         self.lemma_check_var = IntVar()
         self.tag_check_var = IntVar()
+        self.unk_check_var = IntVar()
         self.old_file_var = IntVar()
         self.new_lemma_var = StringVar()
         self.new_tag_var = StringVar()
         self.current_index_var = StringVar()
+        self.unk_var = StringVar()
 
         
         # Import necessary widgets and labels for variable assignment and other functions
@@ -99,10 +106,12 @@ class MollGuiApp:
         self.new_tag_label = builder.get_object('new_tag_label')
         self.lemma_check = builder.get_object('lemma_check')
         self.tag_check = builder.get_object('tag_check')
+        self.unk_check = builder.get_object('unk_check')
         self.old_file_check = builder.get_object('old_file')
         self.index_button = builder.get_object('find_index_button')
         self.index_entry = builder.get_object('find_index')
         self.current_index = builder.get_object('current_index')
+        self.unk_label = builder.get_object('unk_label')
 
         
         # Assign variables to specific widgets and labels
@@ -114,13 +123,14 @@ class MollGuiApp:
         self.new_tag_label.config(textvariable=self.new_tag_var)
         self.lemma_check.config(variable=self.lemma_check_var)
         self.tag_check.config(variable=self.tag_check_var)
+        self.unk_check.config(variable=self.unk_check_var)
         self.old_file_check.config(variable=self.old_file_var)
         self.current_index.config(textvariable=self.current_index_var)
         self.current_word.config(textvariable=self.current_word_var)
         self.word_entry.config(textvariable=self.current_word_var)
         self.lemma_entry.config(textvariable=self.current_lemma_var)
         self.tag_entry.config(textvariable=self.current_tag_var)
-
+        self.unk_label.config(textvariable=self.unk_var)
 
     def run(self):
         '''Runs the main program, needs to be called'''
@@ -129,7 +139,7 @@ class MollGuiApp:
 
 
     def _config_entries(self, lemma_var, tag_var):
-        '''Enables or disables lemma and tag enries according to permission'''
+        '''Enables or disables lemma and tag entries according to permission'''
 
         self.lemma_entry.config(state='normal')
         self.tag_entry.config(state='normal')
@@ -190,6 +200,7 @@ class MollGuiApp:
         self.delimiter = ';' if self.separator.get() == '' else self.separator.get()
         self.allow_lemma = lemma = self.lemma_check_var.get()
         self.allow_tag = tag = self.tag_check_var.get()
+        self.allow_unk = self.unk_check_var.get()
 
         if old_file:
             self.data = pd.read_csv(file_name, delimiter=self.delimiter, engine='python')
@@ -200,18 +211,21 @@ class MollGuiApp:
                 self.new_lemma = ['' for i in range(len(self.words))]
             self.new_tag = self.data[NEW_TAG]
             self.words = (self.data[WORD])
-            self.empty = False
+            
 
         else:
-            self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, LEMMA], engine='python')
+            if self.allow_unk:
+                self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, UNK, LEMMA], engine='python')
+            else:
+                self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, LEMMA], engine='python')
             self.word_index = 0
             self.words = (self.data[WORD])
 
             # Set all values to empty to account for rows in data
             self.new_lemma = ['' for i in range(len(self.words))]
             self.new_tag = ['' for i in range(len(self.words))]
-            self.empty = False
-
+            
+        self.empty = False
         self._config_entries(lemma, tag)
         self._update_all()
 
@@ -232,7 +246,8 @@ class MollGuiApp:
 
     def _save_file(self, _event=None):
         '''Adds changes made to data and saves file'''
-        f = filedialog.asksaveasfile(mode='w', defaultextension="(í vinnslu).csv")
+        now = strftime("%d%b%H:%M", gmtime())
+        f = filedialog.asksaveasfile(mode='w', defaultextension=f"_{now}.csv")
 
         if f is None:
             return
@@ -242,15 +257,16 @@ class MollGuiApp:
             self.data[NEW_LEMMA] = self.new_lemma
 
         # Save to csv without number index
+        if self.delimiter == "\\t":
+            self.delimiter = "\t"
         self.data.to_csv(f, index=False, sep=self.delimiter)
-        self._file_name.close()
+        f.close()
     
 
     def _save_changes(self, _event=None):
         '''Saves each applied change to a new lemma or tag collection'''
 
         if (self.allow_save or not self.allow_tag) and dict(self.data):
-
             # Save the new lemma, or as '-' if unchanged
             self.new_lemma[self.word_index] = '-' \
                 if self.current_lemma_var.get() == self.data[LEMMA][self.word_index] \
@@ -362,6 +378,10 @@ class MollGuiApp:
         self.current_tag_var.set(self.data[TAG][self.word_index])
         self.new_lemma_var.set("" if pd.isna(new_lemma_string) else new_lemma_string)
         self.new_tag_var.set("" if pd.isna(new_tag_string) else new_tag_string)
+        
+        if self.allow_unk:
+            self.unk_var.set("" if pd.isna(self.data[UNK][self.word_index]) else self.data[UNK][self.word_index])
+
 
 
     def _update_all(self):

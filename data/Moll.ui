@@ -254,6 +254,19 @@
             </layout>
           </object>
         </child>
+        <child>
+          <object class="ttk.Label" id="unk_label">
+            <property name="font">{Gubbi} 12 {}</property>
+            <property name="foreground">#ff0000</property>
+            <property name="text" translatable="yes">UNKNOWN</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">n</property>
+            </layout>
+          </object>
+        </child>
       </object>
     </child>
     <child>
@@ -299,7 +312,7 @@
               <property name="columnspan">3</property>
               <property name="ipadx">40</property>
               <property name="propagate">True</property>
-              <property name="row">4</property>
+              <property name="row">5</property>
             </layout>
           </object>
         </child>
@@ -311,7 +324,7 @@
               <property name="column">3</property>
               <property name="padx">10</property>
               <property name="propagate">True</property>
-              <property name="row">4</property>
+              <property name="row">5</property>
               <property name="sticky">w</property>
             </layout>
           </object>
@@ -361,7 +374,7 @@
               <property name="column">0</property>
               <property name="columnspan">2</property>
               <property name="propagate">True</property>
-              <property name="row">5</property>
+              <property name="row">6</property>
               <property name="sticky">w</property>
             </layout>
           </object>
@@ -385,7 +398,7 @@
               <property name="column">0</property>
               <property name="pady">10</property>
               <property name="propagate">True</property>
-              <property name="row">3</property>
+              <property name="row">4</property>
               <property name="sticky">w</property>
             </layout>
           </object>
@@ -397,7 +410,7 @@
               <property name="column">1</property>
               <property name="padx">6</property>
               <property name="propagate">True</property>
-              <property name="row">3</property>
+              <property name="row">4</property>
               <property name="sticky">w</property>
             </layout>
           </object>
@@ -409,7 +422,7 @@
             <layout manager="grid">
               <property name="column">5</property>
               <property name="propagate">True</property>
-              <property name="row">4</property>
+              <property name="row">5</property>
             </layout>
           </object>
         </child>
@@ -419,6 +432,19 @@
             <property name="text" translatable="yes">Sjálfgefið: ';'</property>
             <layout manager="grid">
               <property name="column">2</property>
+              <property name="propagate">True</property>
+              <property name="row">4</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Checkbutton" id="unk_check">
+            <property name="text" translatable="yes">Unknown</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="columnspan">2</property>
+              <property name="padx">5</property>
               <property name="propagate">True</property>
               <property name="row">3</property>
               <property name="sticky">w</property>
