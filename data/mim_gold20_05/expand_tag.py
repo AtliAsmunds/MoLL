@@ -63,6 +63,9 @@ def expand_tag(tag):
             expanded_tag[POS]="samtenging"
             if len(tag)==2:
                 expanded_tag[SUBCATEGORY]="tilvísunartenging"
+    elif tag == 'n----s':
+        expanded_tag[POS]='nafnorð'
+        expanded_tag[SUBCATEGORY]='erlent sérnafn'
     elif tag[0] in "nlg":
         expanded_tag[GENDER] = KYN_MAPPING[tag[1]]
         expanded_tag[NUMBER] = TALA_MAPPING[tag[2]]
@@ -109,7 +112,7 @@ def expand_tag(tag):
     elif tag[0]=='t':
         expanded_tag[POS]="töluorð"
         expanded_tag[SUBCATEGORY]=TOF_MAPPING[tag[1]]
-        if tag[1] not in 'aop':
+        if tag[1] not in 'aop' and len(tag) > 2:
             expanded_tag[GENDER]=KYN_MAPPING[tag[2]]
             expanded_tag[NUMBER]=TALA_MAPPING[tag[3]]
             expanded_tag[CASE]=FALL_MAPPING[tag[4]]
@@ -118,5 +121,5 @@ def expand_tag(tag):
     return expanded_tag
 
 if __name__ == '__main__':
-    test = expand_tag('kt')
+    test = expand_tag('tf')
     print(test)
