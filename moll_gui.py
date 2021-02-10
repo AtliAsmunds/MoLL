@@ -35,8 +35,8 @@ class MollGuiApp:
 
 
         # Configure function loops
-        root.after(20, self._show_option_text)
-        root.after(20, self._expand_tag)
+        root.after(500, self._show_option_text)
+        root.after(500, self._expand_tag)
 
         pd.options.mode.chained_assignment = None
 
@@ -323,7 +323,7 @@ class MollGuiApp:
         
         # Pack the text and call function on loop
         self.text_var.set(expanded_tag)
-        root.after(20, self._expand_tag)
+        root.after(500, self._expand_tag)
 
 
     def _prev_word(self, _event=None):
@@ -412,7 +412,7 @@ class MollGuiApp:
 
         # Pack text and run function on loop
         self.options.set(option)
-        root.after(20, self._show_option_text)
+        root.after(500, self._show_option_text)
 
 
 if __name__ == '__main__':
