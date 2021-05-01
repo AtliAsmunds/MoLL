@@ -3,13 +3,9 @@ from tkinter import IntVar, StringVar, filedialog
 import pygubu
 import pandas as pd
 from time import strftime, gmtime
-# Uncomment to use the old tagset for IFD
-# from data.expand_tag import expand_tag as ex_tag
-# from data.options import show_option, tag_dict
 
-# Data for the MIM GOLD 20 05 tagset
-from data.mim_gold20_05.expand_tag import expand_tag as ex_tag
-from data.mim_gold20_05.options import show_option, tag_dict
+
+from data.options import show_option, extend_tag, tag_dict
 
 PROJECT_PATH = os.path.dirname(__file__)
 PROJECT_UI = os.path.join(PROJECT_PATH, "data/Moll.ui")
@@ -35,8 +31,8 @@ class MollGuiApp:
 
 
         # Configure function loops
-        root.after(500, self._show_option_text)
-        root.after(500, self._expand_tag)
+        root.after(250, self._show_option_text)
+        root.after(250, self._expand_tag)
 
         pd.options.mode.chained_assignment = None
 
@@ -288,7 +284,7 @@ class MollGuiApp:
         for key in tag.keys():
 
             if capitalize:
-                pretty_tag += f"{key}: {tag[key]}\n".capitalize()
+                pretty_tag += f"{key}: {tag[key]}\n"
 
             else:
                 pretty_tag += f"{key}: {tag[key]}\n"
@@ -300,7 +296,7 @@ class MollGuiApp:
         '''Shows word categorization from tag string'''
 
         try:
-            tag = ex_tag(self.current_tag_var.get())
+            tag = extend_tag(self.current_tag_var.get(),tag_dict)
             expanded_tag = self._pretty_print(tag, capitalize=True)
             
             # If tag is empty saving is not allowed
@@ -315,7 +311,7 @@ class MollGuiApp:
                 self.save_change_button.config(state='normal')
         
         # Saving is not allowed if any errors occur
-        except (KeyError, IndexError):
+        except (KeyError, IndexError, AttributeError):
             expanded_tag = ERRORS[0]
             if self.allow_tag:
                 self.allow_save = 0
@@ -323,7 +319,7 @@ class MollGuiApp:
         
         # Pack the text and call function on loop
         self.text_var.set(expanded_tag)
-        root.after(500, self._expand_tag)
+        root.after(250, self._expand_tag)
 
 
     def _prev_word(self, _event=None):
@@ -412,7 +408,7 @@ class MollGuiApp:
 
         # Pack text and run function on loop
         self.options.set(option)
-        root.after(500, self._show_option_text)
+        root.after(250, self._show_option_text)
 
 
 if __name__ == '__main__':
