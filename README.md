@@ -7,7 +7,7 @@ should be extened so that users will be able to add their own tagsets.
 The documentation "MoLL_grein.pdf" is in Icelandic only since the program is, so far, only for the use of
 correcting tags for Icelandic tagsets.
 
-## Update (April 2021)
+### Update (April 2021)
 
 Modifications have been made to make MoLL more tagset independent. This mean that, following the right structure,
 MoLL should be able to use any custom tagging schema.
