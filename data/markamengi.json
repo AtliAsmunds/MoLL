@@ -1,5 +1,5 @@
 {
-    "Orðflokkur":{
+    "PoS":{
         "n":"Nafnorð",
         "l":"Lýsingarorð",
         "f":"Fornafn",
@@ -103,18 +103,21 @@
         "n":"Nafnháttarmerki",
         "t":"Tilvísunartenging"
     },
+    "forked_tags":{
+        "sþ":["Háttur","Mynd", "Kyn", "Tala", "Fall"]
+    },
     "n":["Kyn", "Tala", "Fall", "Greinir", "Sérnafn"],
     "l":["Kyn", "Tala", "Fall", "Beyging", "Stig"],
     "f":["f-Flokkur", "f-Persóna", "Tala", "Fall"],
     "g":["Kyn","Tala","Fall"],
     "t":["t-Flokkur", "Kyn", "Tala", "Fall"],
     "s":["Háttur", "Mynd", "Persóna", "Tala", "Tíð"],
-    "sþ":["Mynd", "Kyn", "Tala", "Fall"],
     "a":["Fallstjórn", "Stig"],
     "c":["c-Flokkur"],
     "e":[],
     "x":[],
-    "p":[]
+    "p":[],
+    "max_len": 6
 
 
 }
