@@ -429,7 +429,7 @@
         <child>
           <object class="ttk.Label" id="label_35">
             <property name="foreground">grey</property>
-            <property name="text" translatable="yes">Sjálfgefið: ';'</property>
+            <property name="text" translatable="yes">Sjálfgefið: '\t'</property>
             <layout manager="grid">
               <property name="column">2</property>
               <property name="propagate">True</property>

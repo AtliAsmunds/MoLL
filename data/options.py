@@ -1,12 +1,21 @@
 import json
+import os
 
 ERROR = "Ekki er hægt að bæta við tagi!"
 
+PROJECT_PATH = os.path.dirname(__file__)
+
 # Uncomment for MIM-GOLD tagset
-tagset_file = 'data/mim_gold20_05/markamengi.json'
+# tagset_file = f'{PROJECT_PATH}/mim_gold20_05/markamengi.json'
 
 # Uncomment for IFD tagset
-# tagset_file = 'data/markamengi.json'
+# tagset_file = f'{PROJECT_PATH}/markamengi.json'
+
+# Uncomment for Foroese tagset
+# tagset_file = f'{PROJECT_PATH}/markamengi_fo.json'
+
+# Uncomment for Foroese tagset in Icelandic
+tagset_file = f'{PROJECT_PATH}/markamengi_fo_isl.json'
 
 with open(tagset_file) as j_file:
     tag_dict = json.load(j_file)
@@ -40,6 +49,10 @@ def extend_tag(tag:str, tag_set:dict):
     if not tag:
         return None
 
+    if tag in tag_set['alternative']:
+        expanded_tag['PoS'] = tag_set['alternative'][tag]
+        return expanded_tag
+
     pos = tag[0]
     expanded_tag['PoS'] = tag_set['PoS'][pos]
     pos_list = tag_set[pos]
@@ -58,7 +71,7 @@ def extend_tag(tag:str, tag_set:dict):
 
     
 if __name__ == '__main__': 
-    test_tag = 'a'
+    test_tag = 'n----s'
 
     ex_tag = extend_tag(test_tag, tag_dict)
 

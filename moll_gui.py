@@ -1,5 +1,6 @@
 import os
 from tkinter import IntVar, StringVar, filedialog
+from tkinter.constants import FALSE
 import pygubu
 import pandas as pd
 from time import strftime, gmtime
@@ -27,6 +28,9 @@ class MollGuiApp:
         root.bind('<Up>', self._prev_word)
         root.bind('<Alt-s>', self._save_changes)
         root.bind('<Control-s>', self._save_file)
+        root.bind('<Alt-S>', self._save_changes)
+        root.bind('<Control-S>', self._save_file)
+
         root.resizable(width=False, height=False)
 
 
@@ -147,12 +151,13 @@ class MollGuiApp:
             self.tag_entry.config(state='disabled')
 
 
-    def _find_last_changed(self, column:list):
+    def _find_last_changed(self, column:list, words:list):
         '''Finds the first unchanged value in the column'''
 
+        words_tag = list(zip(column, words))
         index = 0
-        for value in column:
-            if pd.isna(value):
+        for tag, word in words_tag:
+            if pd.isna(tag) and not pd.isna(word):
                 return index
             index += 1
         return 0
@@ -193,14 +198,14 @@ class MollGuiApp:
     def _load_file(self, file_name, old_file:int):
         '''Loads up data from the given file for opening'''
 
-        self.delimiter = ';' if self.separator.get() == '' else self.separator.get()
+        self.delimiter = r'\t' if self.separator.get() == '' else self.separator.get()
         self.allow_lemma = lemma = self.lemma_check_var.get()
         self.allow_tag = tag = self.tag_check_var.get()
         self.allow_unk = self.unk_check_var.get()
 
         if old_file:
-            self.data = pd.read_csv(file_name, delimiter=self.delimiter, engine='python')
-            self.word_index = self._find_last_changed(self.data[NEW_TAG])
+            self.data = pd.read_csv(file_name, delimiter=self.delimiter, engine='python', skip_blank_lines=False)
+            self.word_index = self._find_last_changed(self.data[NEW_TAG], self.data[WORD])
             try:
                 self.new_lemma = self.data[NEW_LEMMA]
             except KeyError:
@@ -211,9 +216,9 @@ class MollGuiApp:
 
         else:
             if self.allow_unk:
-                self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, UNK, LEMMA], engine='python')
+                self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, UNK, LEMMA], engine='python', skip_blank_lines=FALSE)
             else:
-                self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, LEMMA], engine='python')
+                self.data = pd.read_csv(file_name, delimiter=self.delimiter, names=[WORD, TAG, LEMMA], engine='python', skip_blank_lines=FALSE)
             self.word_index = 0
             self.words = (self.data[WORD])
 
