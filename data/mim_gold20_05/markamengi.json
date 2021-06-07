@@ -32,8 +32,7 @@
         "e":"Eignarfall"
     },
     "Greinir":{
-        "g":"með greini",
-        "-":"á ekki við"
+        "g":"með greini"
     },
     "Sérnafn":{
         "s":"Annað sérnafn"
@@ -113,6 +112,9 @@
     },
     "forked_tags":{
         "sþ":["Háttur","Mynd", "Kyn", "Tala", "Fall"]
+    },
+    "alternative":{
+        "n----s":"Erlent sérnafn"
     },
     "n":["Kyn", "Tala", "Fall", "Greinir", "Sérnafn"],
     "l":["Kyn", "Tala", "Fall", "Beyging", "Stig"],
