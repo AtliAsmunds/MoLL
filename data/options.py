@@ -3,19 +3,19 @@ import os
 
 ERROR = "Ekki er hægt að bæta við tagi!"
 
-PROJECT_PATH = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(os.path.dirname(__file__),"tagsets")
 
 # Uncomment for MIM-GOLD tagset
-# tagset_file = f'{PROJECT_PATH}/mim_gold20_05/markamengi.json'
+# tagset_file = f'{PROJECT_PATH}/mim_gold20_05_tagset.json'
 
 # Uncomment for IFD tagset
-# tagset_file = f'{PROJECT_PATH}/markamengi.json'
+# tagset_file = f'{PROJECT_PATH}/ifd_tagset.json'
 
 # Uncomment for Foroese tagset
-# tagset_file = f'{PROJECT_PATH}/markamengi_fo.json'
+# tagset_file = f'{PROJECT_PATH}/fo_tagset_eng.json'
 
 # Uncomment for Foroese tagset in Icelandic
-tagset_file = f'{PROJECT_PATH}/markamengi_fo_isl.json'
+tagset_file = f'{PROJECT_PATH}/fo_tagset_isl.json'
 
 with open(tagset_file) as j_file:
     tag_dict = json.load(j_file)
