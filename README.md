@@ -12,4 +12,4 @@ correcting tags for Icelandic tagsets.
 Modifications have been made to make MoLL more tagset independent. This mean that, following the right structure,
 MoLL should be able to use any custom tagging schema.
 
-*In depth instructions for the tagging schema setup will be uploaded soon*
+*In depth instructions for tagging schema setup will be uploaded soon*
