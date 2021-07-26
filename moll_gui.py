@@ -345,25 +345,50 @@ class MollGuiApp:
 
     def _update_text(self):
         '''Updates text shown in textbox'''
+        
+        if type(self.words[self.word_index]) == float:
+            self.current_word_var.set(self.words[self.word_index])
 
-        self.current_word_var.set(self.words[self.word_index])
+        self.current_word_var.set(self.words[self.word_index]
+                                    if len(self.words[self.word_index]) < 50
+                                    else self.words[self.word_index][:49])
 
         # Set configurations for first word context
         if self.word_index == 0:
             self.prev_word_var.set('')
-            self.next_word_var.set(self.words[self.word_index+1])
+            if type(self.words[self.word_index+1]) == float:
+                self.next_word_var.set(self.words[self.word_index+1])
+            else:
+                self.next_word_var.set(self.words[self.word_index+1]
+                                    if len(self.words[self.word_index+1]) < 50
+                                    else self.words[self.word_index+1][:49])
             self.prev.config(state='disabled')
 
         # Set configuration for last word context
         elif self.word_index == len(self.words)-1:
-            self.prev_word_var.set(self.words[self.word_index-1])
+            if type(self.words[self.word_index-1]) == float:
+                self.prev_word_var.set(self.words[self.word_index-1])
+            else:
+                self.prev_word_var.set(self.words[self.word_index-1]
+                                    if len(self.words[self.word_index-1]) < 50
+                                    else self.words[self.word_index-1][:49])
             self.next_word_var.set('')
             self.next.config(state='disabled')
 
         # Set configuration for 'in-between' word context
         else:
-            self.prev_word_var.set(self.words[self.word_index-1])
-            self.next_word_var.set(self.words[self.word_index+1])
+            if type(self.words[self.word_index-1]) == float:
+                self.prev_word_var.set(self.words[self.word_index-1])
+            else:
+                self.prev_word_var.set(self.words[self.word_index-1]
+                                    if len(self.words[self.word_index-1]) < 50
+                                    else self.words[self.word_index-1][:49])
+            if type(self.words[self.word_index+1]) == float:
+                self.next_word_var.set(self.words[self.word_index+1])
+            else:
+                self.next_word_var.set(self.words[self.word_index+1]
+                                    if len(self.words[self.word_index+1]) < 50
+                                    else self.words[self.word_index+1][:49])
             self.prev.config(state='normal')
             self.next.config(state='normal')
 
