@@ -15,7 +15,10 @@ PROJECT_PATH = os.path.join(os.path.dirname(__file__),"tagsets")
 # tagset_file = f'{PROJECT_PATH}/fo_tagset_eng.json'
 
 # Uncomment for Foroese tagset in Icelandic
-tagset_file = f'{PROJECT_PATH}/fo_tagset_isl.json'
+# tagset_file = f'{PROJECT_PATH}/fo_tagset_isl.json'
+
+tagset_file = f'{PROJECT_PATH}/fo_tagset-revised_isl.json'
+
 
 with open(tagset_file) as j_file:
     tag_dict = json.load(j_file)
